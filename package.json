@@ -1,0 +1,107 @@
+{
+  "name": "encryptpdf-project",
+  "version": "1.0",
+  "description": "Example to encrypt a PDF file",
+  "engines": {
+    "node": "18.3.0",
+    "npm": "8.11.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "console": "tsc && node --experimental-repl-await ./dist/console.js",
+    "cover": "npm run test-basic -- --coverage",
+    "lint": "tsc --noEmit && eslint \"*/**/*.ts\"",
+    "lint-diff": "git diff --name-only --cached --relative | grep \\\\.ts$ | xargs eslint",
+    "lint-fix": "eslint \"**/*.ts\" --fix",
+    "outdated": "npm outdated --depth 0",
+    "postinstall": "npm run build",
+    "prestart": "npm run lint",
+    "pretest": "npm run lint",
+    "dev": "ts-node-dev --respawn --transpile-only ./server.ts",
+    "start": "npm run build && node ./dist/server.js",
+    "test": "npm run test-basic -- --runInBand",
+    "test-basic": "NODE_ENV=testing jest --forceExit --detectOpenHandles --verbose",
+    "test-inspect": "NODE_ENV=testing node --inspect --debug-brk --detectOpenHandles jest"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "main": "app.js",
+  "author": "John vente",
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.ts",
+      "!**/console.js",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/migrations/**",
+      "!**/config/**",
+      "!**/scripts/**",
+      "!**/docs/**"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$",
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.ts"
+    ],
+    "preset": "@shelf/jest-mongodb"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "encrypt-decrpt-pdf": "^1.0.11",
+    "express": "^4.16.2",
+    "express-wolox-logger": "^2.0.0",
+    "http-status-codes": "^1.4.0",
+    "multiparty": "^4.2.3",
+    "npm": "^8.12.1",
+    "reflect-metadata": "^0.1.13",
+    "rollbar": "^2.3.9"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^3.0.1",
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.5",
+    "@types/express": "^4.17.0",
+    "@types/multiparty": "^0.0.33",
+    "@types/node": "^13.7.6",
+    "@types/supertest": "^2.0.8",
+    "@types/umzug": "^2.2.3",
+    "@types/validator": "^12.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "babel-core": "6.26.3",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "28.1.1",
+    "babel-preset-env": "^1.7.0",
+    "dictum.js": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-wolox": "^4.0.0",
+    "eslint-config-wolox-node": "^3.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "jest": "^28.1.0",
+    "nock": "^12.0.2",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.0",
+    "prompt": "^1.0.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^28.0.0",
+    "ts-node-dev": "^1.1.8",
+    "tslint": "^6.0.0",
+    "typescript": "^4.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
+}
